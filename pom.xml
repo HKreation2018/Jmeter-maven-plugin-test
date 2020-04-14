@@ -61,13 +61,13 @@
                            <goal>jmeter</goal>
                         </goals>
                    </execution>
-                   <execution>
+                <!--   <execution>
                        <id>check-results</id>
                        <phase>verify</phase>
                        <goals>
                           <goal>results</goal>
                        </goals>
-                   </execution>
+                   </execution> -->
                </executions>
             </plugin>
 		</plugins>
