@@ -42,12 +42,7 @@ pipeline {
     } */
 	stage('performance test') {
       steps {
-             bat 'mvn verify'
-      }
-    }
-    stage('performance test report') {
-      steps {
-             bat 'mvn pre-site'
+             bat 'mvn verify -DthreadCount=20 -DrampupTime=5 -DdurationSecond=60'
       }
     }
   }
