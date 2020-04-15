@@ -57,8 +57,18 @@ pipeline {
         
         
 	stage('performance test') {
+	  input {
+             message 'threads count'
+             id 'ThreadCount'
+             ok 'YES'
+             submitter 'admin'
+             parameters {
+                    choice choices: ['5', '10', '20'], description: 'select the no of threads?', name: 'threadCount'
+             }
+        }
+	       
       steps {
-             bat 'mvn verify -DthreadCount=20 -DrampupTime=5 -DdurationSecond=60'
+             bat 'mvn verify -DthreadCount=${threadCount} -DrampupTime=5 -DdurationSecond=60'
       }
     }
   }
