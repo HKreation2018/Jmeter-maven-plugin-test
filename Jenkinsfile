@@ -46,7 +46,7 @@ pipeline {
                 def threadCount = input {
                     message "Select a thread count"
                     parameters {
-                        choice(name: "thread_count", choices:5\n10\n15 , description: "thread count")
+                        choice(name: "thread_count", choices:[5,10,15] , description: "thread count")
                     }
                 }
             }
