@@ -1,6 +1,9 @@
 pipeline {
 
   agent any
+  parameters {
+        string(name: 'THREADCOUNT', defaultValue: '2', description: 'Thread count for the triggers')
+    }
   environment {
     //adding a comment for the commit test
     DEPLOY_CREDS_USR = "hari-cicd"
@@ -42,7 +45,7 @@ pipeline {
     } */
 	stage('performance test') {
       steps {
-             bat 'mvn verify -DthreadCount=20 -DrampupTime=5 -DdurationSecond=60'
+             bat 'mvn verify -DthreadCount=${params.THREADCOUNT} -DrampupTime=5 -DdurationSecond=60'
       }
     }
   }
