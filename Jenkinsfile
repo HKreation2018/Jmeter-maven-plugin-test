@@ -1,9 +1,6 @@
 pipeline {
 
   agent any
-  parameters {
-        string(name: 'THREADCOUNT', defaultValue: '2', description: 'Thread count for the triggers')
-    }
   environment {
     //adding a comment for the commit test
     DEPLOY_CREDS_USR = "hari-cicd"
@@ -43,9 +40,22 @@ pipeline {
             bat 'mvn -U -V -e -B -DskipTests deploy -DmuleDeploy -Dmule.version="%MULE_VERSION%" -Danypoint.username="%DEPLOY_CREDS_USR%" -Danypoint.password="%DEPLOY_CREDS_PSW%" -Dcloudhub.app="%APP_NAME%" -Dcloudhub.environment="%ENVIRONMENT%" -Dcloudhub.bg="%BG%" -Dcloudhub.worker="%WORKER%"'
       }
     } */
+    
+    stage('thread count') {
+            steps {
+                def threadCount = input {
+                    message "Select a thread count"
+                    parameters {
+                        choice(name: "thread_count", choices:5\n10\n15 , description: "thread count")
+                    }
+                }
+            }
+        }
+        
+        
 	stage('performance test') {
       steps {
-             bat 'mvn verify -DthreadCount=${params.THREADCOUNT} -DrampupTime=5 -DdurationSecond=60'
+             bat 'mvn verify -DthreadCount=${threadCount} -DrampupTime=5 -DdurationSecond=60'
       }
     }
   }
