@@ -41,21 +41,6 @@ pipeline {
       }
     } */
         
-    stage('Example') {
-            input {
-                message "Should we continue?"
-                ok "Yes, we should."
-                submitter "alice,bob"
-                parameters {
-                    string(name: 'PERSON', defaultValue: 'Mr Jenkins', description: 'Who should I say hello to?')
-                }
-            }
-            steps {
-                echo "Hello, ${PERSON}, nice to meet you."
-            }
-        }    
-        
-        
 	stage('performance test') {
 	  input {
              message 'threads count'
@@ -63,12 +48,12 @@ pipeline {
              ok 'PROCEED'
              submitter 'admin'
              parameters {
-                    choice choices: ['5', '10', '20'], description: 'select the no of threads?', name: 'THREADS'
+                    choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the no of threads?', name: 'THREADS'
              }
         }
 	       
       steps {
-             bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=5 -DdurationSecond=60'
+             bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=5 -DdurationSecond=120'
       }
     }
   }
