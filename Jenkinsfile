@@ -22,7 +22,7 @@ pipeline {
       }
     } */
 
-     stage('Deploy Development') {
+/*     stage('Deploy Development') {
       environment {
         ENVIRONMENT = 'Sandbox'
         APP_NAME = 'jmeter-maven-plugin-test'
@@ -30,7 +30,7 @@ pipeline {
       steps {
             bat 'mvn -U -V -e -B -DskipTests deploy -DmuleDeploy -Dmule.version="%MULE_VERSION%" -Danypoint.username="%DEPLOY_CREDS_USR%" -Danypoint.password="%DEPLOY_CREDS_PSW%" -Dcloudhub.app="%APP_NAME%" -Dcloudhub.environment="%ENVIRONMENT%" -Dcloudhub.worker="%WORKER%"'
       }
-    }
+    } */
    /* stage('Deploy Production') {
       environment {
         ENVIRONMENT = 'Production'
@@ -58,7 +58,7 @@ pipeline {
 	  
 	  post {
         always {
-            archiveArtifacts artifacts: 'C:/Program Files (x86)/Jenkins/workspace/jmeter-test/target/jmeter/reports/worldTimeZoneTest/index.html', caseSensitive: false, defaultExcludes: false, followSymlinks: false, onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'target/jmeter/reports/**/*.html', caseSensitive: false, defaultExcludes: false, followSymlinks: false, onlyIfSuccessful: true
         }
 	}
     }
