@@ -60,6 +60,7 @@ pipeline {
         always {
             archiveArtifacts artifacts: 'target/jmeter/results/*.csv', caseSensitive: false, defaultExcludes: false, followSymlinks: false, onlyIfSuccessful: true
 			perfReport 'target/jmeter/results/*.csv'
+			publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'target/jmeter/reports/worldTimeZoneTest', reportFiles: 'index.html', reportName: 'HTML Report', reportTitles: ''])
         }
 	}
     }
