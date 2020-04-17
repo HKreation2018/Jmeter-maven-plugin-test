@@ -56,5 +56,10 @@ pipeline {
              bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=5 -DdurationSecond=120'
       }
     }
+	 post {
+        always {
+            archiveArtifacts artifacts: 'workspace/jmeter-test/target/jmeter/reports/worldTimeZoneTest/index.html', caseSensitive: false, defaultExcludes: false, followSymlinks: false, onlyIfSuccessful: true
+        }
+	}
   }
 }
