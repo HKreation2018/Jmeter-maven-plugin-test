@@ -59,6 +59,7 @@ pipeline {
 	  post {
         always {
             archiveArtifacts artifacts: 'target/jmeter/results/*.csv', caseSensitive: false, defaultExcludes: false, followSymlinks: false, onlyIfSuccessful: true
+			perfReport 'target/jmeter/results/*.csv'
         }
 	}
     }
