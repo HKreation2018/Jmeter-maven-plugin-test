@@ -41,6 +41,17 @@ pipeline {
       }
     } */
 	
+	stage('Load test check') {
+	  input {
+             message 'proceed with performance test?'
+             ok 'proceed'
+             submitter 'admin'
+        }
+	  steps {
+             echo  'proceeding with performance test'
+      }
+    }
+	
 	stage('performance test') {
 	  input {
              message 'threads count'
