@@ -40,9 +40,9 @@ pipeline {
             bat 'mvn -U -V -e -B -DskipTests deploy -DmuleDeploy -Dmule.version="%MULE_VERSION%" -Danypoint.username="%DEPLOY_CREDS_USR%" -Danypoint.password="%DEPLOY_CREDS_PSW%" -Dcloudhub.app="%APP_NAME%" -Dcloudhub.environment="%ENVIRONMENT%" -Dcloudhub.bg="%BG%" -Dcloudhub.worker="%WORKER%"'
       }
     } */
-	   
+	
 	stage('performance test') {
-	  input [{
+	  input {
              message 'threads count'
              id 'ThreadCount'
              ok 'PROCEED'
@@ -50,12 +50,7 @@ pipeline {
              parameters {
                     choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the no of threads?', name: 'THREADS'
              }
-        },
-	 {
-             message 'proceed with performance test?'
-             ok 'proceed'
-             submitter 'admin'
-        }]
+        }
 	       
       steps {
              bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=5 -DdurationSecond=120'
