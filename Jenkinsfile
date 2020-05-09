@@ -3,7 +3,7 @@ pipeline {
   agent any
   environment {
     //adding a comment for the commit test
-    DEPLOY_CREDS_USR = "hari-cicd"
+    DEPLOY_CREDS_USR = "hari-Jmeter"
 	DEPLOY_CREDS_PSW = "Indian@018"
     MULE_VERSION = '4.2.2'
     BG = "IFT"
@@ -22,7 +22,7 @@ pipeline {
       }
     } */
 
-/*     stage('Deploy Development') {
+    stage('Deploy Development') {
       environment {
         ENVIRONMENT = 'Sandbox'
         APP_NAME = 'jmeter-maven-plugin-test'
@@ -30,7 +30,7 @@ pipeline {
       steps {
             bat 'mvn -U -V -e -B -DskipTests deploy -DmuleDeploy -Dmule.version="%MULE_VERSION%" -Danypoint.username="%DEPLOY_CREDS_USR%" -Danypoint.password="%DEPLOY_CREDS_PSW%" -Dcloudhub.app="%APP_NAME%" -Dcloudhub.environment="%ENVIRONMENT%" -Dcloudhub.worker="%WORKER%"'
       }
-    } */
+    } 
    /* stage('Deploy Production') {
       environment {
         ENVIRONMENT = 'Production'
