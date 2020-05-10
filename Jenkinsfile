@@ -22,7 +22,7 @@ pipeline {
       }
     } */
 
-    stage('Deploy Development') {
+    /*  stage('Deploy Development') {
       environment {
         ENVIRONMENT = 'Sandbox'
         APP_NAME = 'jmeter-maven-plugin-test'
@@ -31,7 +31,7 @@ pipeline {
             bat 'mvn -U -V -e -B -DskipTests deploy -DmuleDeploy -Dmule.version="%MULE_VERSION%" -Danypoint.username="%DEPLOY_CREDS_USR%" -Danypoint.password="%DEPLOY_CREDS_PSW%" -Dcloudhub.app="%APP_NAME%" -Dcloudhub.environment="%ENVIRONMENT%" -Dcloudhub.worker="%WORKER%"'
       }
     } 
-   /* stage('Deploy Production') {
+  stage('Deploy Production') {
       environment {
         ENVIRONMENT = 'Production'
         APP_NAME = '<API-NAME>'
@@ -53,18 +53,9 @@ pipeline {
     }
 	
 	stage('performance test') {
-	  input {
-             message 'threads count'
-             id 'ThreadCount'
-             ok 'PROCEED'
-             submitter 'admin'
-             parameters {
-                    choice choices: ['5', '10', '20','30','40','50','100','150','200'], description: 'select the no of threads?', name: 'THREADS'
-             }
-        }
 	       
       steps {
-             bat 'mvn verify -DthreadCount=${THREADS} -DrampupTime=5 -DdurationSecond=120'
+             bat 'mvn verify'
       }
 	  
 	  post {
